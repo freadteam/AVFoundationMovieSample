@@ -69,6 +69,21 @@
                                             <action selector="changeCamera" destination="5vT-pw-bMq" eventType="touchUpInside" id="mFu-lP-IXI"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OTf-qk-biJ">
+                                        <rect key="frame" x="131" y="21" width="113" height="38"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y2r-S3-K3x">
+                                        <rect key="frame" x="8" y="16" width="46" height="48"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <connections>
+                                            <action selector="selectFilter" destination="5vT-pw-bMq" eventType="touchUpInside" id="nkP-Us-yfN"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -113,6 +128,7 @@
                         <outlet property="footerView" destination="83U-Ch-gCC" id="b1p-im-bp0"/>
                         <outlet property="headerView" destination="cXU-M1-xgu" id="SMv-6A-JR4"/>
                         <outlet property="previewView" destination="yy6-qc-BwG" id="kNw-Ce-r4s"/>
+                        <outlet property="processingLabel" destination="OTf-qk-biJ" id="EkN-es-tmf"/>
                         <outlet property="startStopButton" destination="P00-0q-npI" id="CP5-u4-8qG"/>
                     </connections>
                 </viewController>

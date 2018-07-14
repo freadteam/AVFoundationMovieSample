@@ -10,6 +10,7 @@ import UIKit
 import AVFoundation
 //動画を保存するのに必要
 import Photos
+import SVProgressHUD
 
 class MovieViewController: UIViewController, AVCaptureFileOutputRecordingDelegate {
     
@@ -17,11 +18,13 @@ class MovieViewController: UIViewController, AVCaptureFileOutputRecordingDelegat
     var isRecoding = false
     var isBackCamera: Bool = true
     var fileOutput: AVCaptureMovieFileOutput?
+    var selectedfilter = "CIPhotoEffectTonal"
     
     @IBOutlet weak var previewView: UIView!
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var footerView: UIView!
     @IBOutlet weak var startStopButton: UIButton!
+    @IBOutlet weak var processingLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,13 +63,18 @@ class MovieViewController: UIViewController, AVCaptureFileOutputRecordingDelegat
             captureSession.startRunning()
         }
     }
+    //録画開始
+    func fileOutput(_ output: AVCaptureFileOutput, didStartRecordingTo fileURL: URL, from connections: [AVCaptureConnection]) {
+
+    }
     
     //delegate、録画完了
     func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
        //-----------------------------------------------------------------
+        SVProgressHUD.show()
         //フィルターをかける
         let asset = AVAsset(url: outputFileURL)
-        let filter = CIFilter(name: "")!
+        let filter = CIFilter(name: selectedfilter)!
         filter.setDefaults()
         // a: ドット風の白黒
         //CIMinimumComponent：白黒
@@ -76,15 +84,21 @@ class MovieViewController: UIViewController, AVCaptureFileOutputRecordingDelegat
         //CIPhotoEffectNoir：白黒
         //CIColorPosterize
         //CIMaskToAlpha：油絵
+        //CIColorMonochrome
         let videoComposition = AVVideoComposition(asset: asset) { request in
             filter.setValue(request.sourceImage, forKey: kCIInputImageKey)
-            //CIColorMonochrome
-            //            filter.setValue(CIColor(red: 0.5, green: 0.5, blue: 0.5), forKey: kCIInputColorKey)
-            //            filter.setValue(0.4, forKey: kCIInputIntensityKey)
-            //
             let output = filter.outputImage!.cropped(to: request.sourceImage.extent)
-              print(request.compositionTime)
+            
+            //加工にかかる時間
+            let cmTime = request.compositionTime
+            let value = cmTime.value
+            let timeScale = cmTime.timescale
+            let processingTime = Int(value)/Int(timeScale)
+              DispatchQueue.main.async {
+            self.processingLabel.text = String(processingTime)
+            }
             request.finish(with: output, context: nil)
+            
         }
         let tmpURL = FileManager.default.urls(
             for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("video.mp4")
@@ -101,8 +115,8 @@ class MovieViewController: UIViewController, AVCaptureFileOutputRecordingDelegat
         
         //ライブラリに保存
         exportSession.exportAsynchronously {
-            print("tst")
             UISaveVideoAtPathToSavedPhotosAlbum(tmpURL.path, nil, nil, nil)
+             SVProgressHUD.dismiss()
         }
         // ライブラリへ保存する（処理なし）
 //        PHPhotoLibrary.shared().performChanges({
@@ -141,9 +155,57 @@ class MovieViewController: UIViewController, AVCaptureFileOutputRecordingDelegat
         isRecoding = !isRecoding
         screenInitialization()
     }
-    
-    
+
+    @IBAction func selectFilter() {
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let alert1 = UIAlertAction(title: "CIPhotoEffectTonal", style: .destructive) { (action) in
+            self.selectedfilter = "CIPhotoEffectTonal"
+        }
+        let alert2 = UIAlertAction(title: "CIMinimumComponent", style: .destructive) { (action) in
+            self.selectedfilter = "CIMinimumComponent"
+        }
+        let alert3 = UIAlertAction(title: "CIPhotoEffectTonal", style: .destructive) { (action) in
+            self.selectedfilter = "CIPhotoEffectTonal"
+        }
+        let alert4 = UIAlertAction(title: "CIColorPosterize", style: .destructive) { (action) in
+            self.selectedfilter = "CIColorPosterize"
+        }
+        let alert5 = UIAlertAction(title: "CIPhotoEffectMono", style: .destructive) { (action) in
+            self.selectedfilter = "CIPhotoEffectMono"
+        }
+        let alert6 = UIAlertAction(title: "CIPhotoEffectNoir", style: .destructive) { (action) in
+            self.selectedfilter = "CIPhotoEffectNoir"
+        }
+        let alert7 = UIAlertAction(title: "CIColorPosterize", style: .destructive) { (action) in
+            self.selectedfilter = "CIColorPosterize"
+        }
+        let alert8 = UIAlertAction(title: "CIMaskToAlpha", style: .destructive) { (action) in
+            self.selectedfilter = "CIMaskToAlpha"
+        }
+        let alert9 = UIAlertAction(title: "CIColorMonochrome", style: .destructive) { (action) in
+            self.selectedfilter = "CIColorMonochrome"
+        }
+        let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel) { (action) in
+            alertController.dismiss(animated: true, completion: nil)
+        }
+        
+        alertController.addAction(alert1)
+        alertController.addAction(alert2)
+        alertController.addAction(alert3)
+        alertController.addAction(alert4)
+        alertController.addAction(alert5)
+        alertController.addAction(alert6)
+        alertController.addAction(alert7)
+        alertController.addAction(alert8)
+        alertController.addAction(alert9)
+        alertController.addAction(cancelAction)
+        //ipadで必須
+        alertController.popoverPresentationController?.sourceView = self.view
+        let screenSize = UIScreen.main.bounds
+        // ここで表示位置を調整
+        // xは画面中央、yは画面下部になる様に指定
+        alertController.popoverPresentationController?.sourceRect = CGRect(x: screenSize.size.width/2, y: screenSize.size.height, width: 0, height: 0)
+        self.present(alertController, animated: true, completion: nil)
+    }
     
 }
-
-

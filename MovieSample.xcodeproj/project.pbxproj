@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1358AFB78240B2690EEDE80B /* Pods_MovieSample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55142A688035790B66362219 /* Pods_MovieSample.framework */; };
 		2C52F37D20F851C80019A7A1 /* changeCamera.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C52F37C20F851C70019A7A1 /* changeCamera.png */; };
 		2C52F38020F852A80019A7A1 /* square.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C52F37E20F852A80019A7A1 /* square.png */; };
 		2C52F38120F852A80019A7A1 /* circle.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C52F37F20F852A80019A7A1 /* circle.png */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		298291C5F2E71573D81689DD /* Pods-MovieSample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieSample.release.xcconfig"; path = "Pods/Target Support Files/Pods-MovieSample/Pods-MovieSample.release.xcconfig"; sourceTree = "<group>"; };
 		2C52F37C20F851C70019A7A1 /* changeCamera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = changeCamera.png; sourceTree = "<group>"; };
 		2C52F37E20F852A80019A7A1 /* square.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = square.png; sourceTree = "<group>"; };
 		2C52F37F20F852A80019A7A1 /* circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circle.png; sourceTree = "<group>"; };
@@ -30,6 +32,8 @@
 		2CE04A1120F5C6AB0086486D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2CE04A1320F5C6AB0086486D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2CE04A1920F5CB7D0086486D /* MovieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieViewController.swift; sourceTree = "<group>"; };
+		3DDC314D5C2F5F88E2413783 /* Pods-MovieSample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieSample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MovieSample/Pods-MovieSample.debug.xcconfig"; sourceTree = "<group>"; };
+		55142A688035790B66362219 /* Pods_MovieSample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MovieSample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,17 +41,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1358AFB78240B2690EEDE80B /* Pods_MovieSample.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		221D492693B14DC1A53A2A09 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3DDC314D5C2F5F88E2413783 /* Pods-MovieSample.debug.xcconfig */,
+				298291C5F2E71573D81689DD /* Pods-MovieSample.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		2CE049FB20F5C6AA0086486D = {
 			isa = PBXGroup;
 			children = (
 				2CE04A0620F5C6AA0086486D /* MovieSample */,
 				2CE04A0520F5C6AA0086486D /* Products */,
+				221D492693B14DC1A53A2A09 /* Pods */,
+				A5E636FA1547CD5008596F70 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -76,6 +92,14 @@
 			path = MovieSample;
 			sourceTree = "<group>";
 		};
+		A5E636FA1547CD5008596F70 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				55142A688035790B66362219 /* Pods_MovieSample.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -83,9 +107,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2CE04A1620F5C6AB0086486D /* Build configuration list for PBXNativeTarget "MovieSample" */;
 			buildPhases = (
+				79CE6D3255CB46026208FAF7 /* [CP] Check Pods Manifest.lock */,
 				2CE04A0020F5C6AA0086486D /* Sources */,
 				2CE04A0120F5C6AA0086486D /* Frameworks */,
 				2CE04A0220F5C6AA0086486D /* Resources */,
+				609B7C8A45062CD22201DA2D /* [CP] Embed Pods Frameworks */,
+				EA3D1F7DA73E26574D4437CB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -144,6 +171,60 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		609B7C8A45062CD22201DA2D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-MovieSample/Pods-MovieSample-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MovieSample/Pods-MovieSample-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		79CE6D3255CB46026208FAF7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MovieSample-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EA3D1F7DA73E26574D4437CB /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MovieSample/Pods-MovieSample-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		2CE04A0020F5C6AA0086486D /* Sources */ = {
@@ -294,15 +375,13 @@
 		};
 		2CE04A1720F5C6AB0086486D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3DDC314D5C2F5F88E2413783 /* Pods-MovieSample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7P8JXGM6U3;
 				INFOPLIST_FILE = MovieSample/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.freadteam.ryo.MovieSample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -312,15 +391,13 @@
 		};
 		2CE04A1820F5C6AB0086486D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 298291C5F2E71573D81689DD /* Pods-MovieSample.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7P8JXGM6U3;
 				INFOPLIST_FILE = MovieSample/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.freadteam.ryo.MovieSample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;

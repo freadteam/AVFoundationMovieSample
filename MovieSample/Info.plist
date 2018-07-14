@@ -47,5 +47,7 @@
 	<string>カメラの使用を許可しますか</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>マイクの使用を許可しますか</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>アルバムへの追加を許可しますか</string>
 </dict>
 </plist>
