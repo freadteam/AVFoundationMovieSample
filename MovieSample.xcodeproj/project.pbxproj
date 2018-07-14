@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C52F37D20F851C80019A7A1 /* changeCamera.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C52F37C20F851C70019A7A1 /* changeCamera.png */; };
+		2C52F38020F852A80019A7A1 /* square.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C52F37E20F852A80019A7A1 /* square.png */; };
+		2C52F38120F852A80019A7A1 /* circle.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C52F37F20F852A80019A7A1 /* circle.png */; };
 		2CE04A0820F5C6AA0086486D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE04A0720F5C6AA0086486D /* AppDelegate.swift */; };
 		2CE04A0A20F5C6AA0086486D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE04A0920F5C6AA0086486D /* ViewController.swift */; };
 		2CE04A0D20F5C6AA0086486D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CE04A0B20F5C6AA0086486D /* Main.storyboard */; };
@@ -16,6 +19,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2C52F37C20F851C70019A7A1 /* changeCamera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = changeCamera.png; sourceTree = "<group>"; };
+		2C52F37E20F852A80019A7A1 /* square.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = square.png; sourceTree = "<group>"; };
+		2C52F37F20F852A80019A7A1 /* circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circle.png; sourceTree = "<group>"; };
 		2CE04A0420F5C6AA0086486D /* MovieSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CE04A0720F5C6AA0086486D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2CE04A0920F5C6AA0086486D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -63,6 +69,9 @@
 				2CE04A0E20F5C6AB0086486D /* Assets.xcassets */,
 				2CE04A1020F5C6AB0086486D /* LaunchScreen.storyboard */,
 				2CE04A1320F5C6AB0086486D /* Info.plist */,
+				2C52F37C20F851C70019A7A1 /* changeCamera.png */,
+				2C52F37F20F852A80019A7A1 /* circle.png */,
+				2C52F37E20F852A80019A7A1 /* square.png */,
 			);
 			path = MovieSample;
 			sourceTree = "<group>";
@@ -127,6 +136,9 @@
 			files = (
 				2CE04A1220F5C6AB0086486D /* LaunchScreen.storyboard in Resources */,
 				2CE04A0F20F5C6AB0086486D /* Assets.xcassets in Resources */,
+				2C52F38020F852A80019A7A1 /* square.png in Resources */,
+				2C52F38120F852A80019A7A1 /* circle.png in Resources */,
+				2C52F37D20F851C80019A7A1 /* changeCamera.png in Resources */,
 				2CE04A0D20F5C6AA0086486D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

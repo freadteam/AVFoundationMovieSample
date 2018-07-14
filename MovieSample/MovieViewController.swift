@@ -61,20 +61,62 @@ class MovieViewController: UIViewController, AVCaptureFileOutputRecordingDelegat
         }
     }
     
-    //delegate、録画完了？
+    //delegate、録画完了
     func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
-        // ライブラリへの保存
-        PHPhotoLibrary.shared().performChanges({
-            PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: outputFileURL)
-        }) { completed, error in
-            if completed {
-                print("Video is saved!")
-            }
+       //-----------------------------------------------------------------
+        //フィルターをかける
+        let asset = AVAsset(url: outputFileURL)
+        let filter = CIFilter(name: "")!
+        filter.setDefaults()
+        // a: ドット風の白黒
+        //CIMinimumComponent：白黒
+        //CIPhotoEffectTonal: いい感じの白黒
+        //CIColorPosterize：　油絵
+        //CIPhotoEffectMono:濃い白黒
+        //CIPhotoEffectNoir：白黒
+        //CIColorPosterize
+        //CIMaskToAlpha：油絵
+        let videoComposition = AVVideoComposition(asset: asset) { request in
+            filter.setValue(request.sourceImage, forKey: kCIInputImageKey)
+            //CIColorMonochrome
+            //            filter.setValue(CIColor(red: 0.5, green: 0.5, blue: 0.5), forKey: kCIInputColorKey)
+            //            filter.setValue(0.4, forKey: kCIInputIntensityKey)
+            //
+            let output = filter.outputImage!.cropped(to: request.sourceImage.extent)
+              print(request.compositionTime)
+            request.finish(with: output, context: nil)
         }
+        let tmpURL = FileManager.default.urls(
+            for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("video.mp4")
+        
+        try? FileManager.default.removeItem(at: tmpURL)
+        
+        guard let exportSession = AVAssetExportSession(asset: asset, presetName: AVAssetExportPresetHighestQuality) else {
+            fatalError()
+        }
+        
+        exportSession.outputURL = tmpURL
+        exportSession.outputFileType = .mp4
+        exportSession.videoComposition = videoComposition
+        
+        //ライブラリに保存
+        exportSession.exportAsynchronously {
+            print("tst")
+            UISaveVideoAtPathToSavedPhotosAlbum(tmpURL.path, nil, nil, nil)
+        }
+        // ライブラリへ保存する（処理なし）
+//        PHPhotoLibrary.shared().performChanges({
+//            PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: outputFileURL)
+//        }) { completed, error in
+//            if completed {
+//                print("Video is saved!")
+//            }
+//        }
     }
     
+    
     func screenInitialization(){
-        startStopButton.setImage(UIImage(named: isRecoding ? "startButton" : "stopButton"), for: .normal)
+        startStopButton.setImage(UIImage(named: isRecoding ? "square.png" : "circle.png"), for: .normal)
         headerView.alpha = isRecoding ? 0.6 : 1.0
         footerView.alpha = isRecoding ? 0.6 : 1.0
     }
@@ -89,8 +131,7 @@ class MovieViewController: UIViewController, AVCaptureFileOutputRecordingDelegat
     @IBAction func tapStartStopButton(_ sender: Any) {
         if isRecoding { // 録画終了
             fileOutput?.stopRecording()
-        }
-        else{ // 録画開始
+        } else { // 録画開始
             let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
             let documentsDirectory = paths[0] as String
             let filePath : String? = "\(documentsDirectory)/temp.mp4"
@@ -100,6 +141,9 @@ class MovieViewController: UIViewController, AVCaptureFileOutputRecordingDelegat
         isRecoding = !isRecoding
         screenInitialization()
     }
+    
+    
+    
 }
 
 
