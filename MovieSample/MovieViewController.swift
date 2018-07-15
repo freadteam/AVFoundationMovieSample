@@ -12,6 +12,7 @@ import AVFoundation
 import Photos
 import SVProgressHUD
 
+
 class MovieViewController: UIViewController, AVCaptureFileOutputRecordingDelegate {
     
     var cameraDevices: AVCaptureDevice!
@@ -102,15 +103,7 @@ class MovieViewController: UIViewController, AVCaptureFileOutputRecordingDelegat
         let asset = AVAsset(url: outputFileURL)
         let filter = CIFilter(name: filterArray.first!)!
         filter.setDefaults()
-        // a: ドット風の白黒
-        //CIMinimumComponent：白黒
-        //CIPhotoEffectTonal: いい感じの白黒
-        //CIColorPosterize：　油絵
-        //CIPhotoEffectMono:濃い白黒
-        //CIPhotoEffectNoir：白黒
-        //CIColorPosterize
-        //CIMaskToAlpha：油絵
-        //CIColorMonochrome
+
         let videoComposition = AVVideoComposition(asset: asset) { request in
             filter.setValue(request.sourceImage, forKey: kCIInputImageKey)
             let output = filter.outputImage!.cropped(to: request.sourceImage.extent)

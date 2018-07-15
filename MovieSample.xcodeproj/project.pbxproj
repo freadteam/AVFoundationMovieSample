@@ -11,6 +11,7 @@
 		2C52F37D20F851C80019A7A1 /* changeCamera.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C52F37C20F851C70019A7A1 /* changeCamera.png */; };
 		2C52F38020F852A80019A7A1 /* square.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C52F37E20F852A80019A7A1 /* square.png */; };
 		2C52F38120F852A80019A7A1 /* circle.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C52F37F20F852A80019A7A1 /* circle.png */; };
+		2CAC6DD220FB8B83003BA156 /* GPUImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CAC6DD120FB8B83003BA156 /* GPUImage.framework */; };
 		2CE04A0820F5C6AA0086486D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE04A0720F5C6AA0086486D /* AppDelegate.swift */; };
 		2CE04A0A20F5C6AA0086486D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE04A0920F5C6AA0086486D /* ViewController.swift */; };
 		2CE04A0D20F5C6AA0086486D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CE04A0B20F5C6AA0086486D /* Main.storyboard */; };
@@ -24,6 +25,7 @@
 		2C52F37C20F851C70019A7A1 /* changeCamera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = changeCamera.png; sourceTree = "<group>"; };
 		2C52F37E20F852A80019A7A1 /* square.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = square.png; sourceTree = "<group>"; };
 		2C52F37F20F852A80019A7A1 /* circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circle.png; sourceTree = "<group>"; };
+		2CAC6DD120FB8B83003BA156 /* GPUImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GPUImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CE04A0420F5C6AA0086486D /* MovieSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CE04A0720F5C6AA0086486D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2CE04A0920F5C6AA0086486D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -41,6 +43,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CAC6DD220FB8B83003BA156 /* GPUImage.framework in Frameworks */,
 				1358AFB78240B2690EEDE80B /* Pods_MovieSample.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -95,6 +98,7 @@
 		A5E636FA1547CD5008596F70 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2CAC6DD120FB8B83003BA156 /* GPUImage.framework */,
 				55142A688035790B66362219 /* Pods_MovieSample.framework */,
 			);
 			name = Frameworks;
@@ -180,10 +184,12 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-MovieSample/Pods-MovieSample-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GPUImage/GPUImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GPUImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -381,7 +387,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7P8JXGM6U3;
 				INFOPLIST_FILE = MovieSample/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.freadteam.ryo.MovieSample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -397,7 +406,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7P8JXGM6U3;
 				INFOPLIST_FILE = MovieSample/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.freadteam.ryo.MovieSample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
