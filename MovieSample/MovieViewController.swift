@@ -18,20 +18,46 @@ class MovieViewController: UIViewController, AVCaptureFileOutputRecordingDelegat
     var isRecoding = false
     var isBackCamera: Bool = true
     var fileOutput: AVCaptureMovieFileOutput?
-    var selectedfilter = "CIPhotoEffectTonal"
+    var filterArray = ["CIPhotoEffectTonal", "CIMinimumComponent", "CIColorPosterize", "CIPhotoEffectMono", "CIPhotoEffectNoir", "CIColorPosterize", "CIMaskToAlpha", "CIColorMonochrome"]
     
     @IBOutlet weak var previewView: UIView!
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var footerView: UIView!
     @IBOutlet weak var startStopButton: UIButton!
     @IBOutlet weak var processingLabel: UILabel!
+    @IBOutlet weak var filterLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpVideo(isBack: isBackCamera)
         screenInitialization()
+        filterLabel.text = filterArray.first!
+        headerView.addSubview(filterLabel)
+        
+        //swipe
+        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(MovieViewController.didSwipe(_:)))
+        rightSwipe.direction = .right
+        
+        let leftSwipe = UISwipeGestureRecognizer(target: self, action:  #selector(MovieViewController.didSwipe(_:)))
+        leftSwipe.direction = .left
+        // swipe動作の追加
+        view.addGestureRecognizer(rightSwipe)
+        view.addGestureRecognizer(leftSwipe)
     }
-    
+    //swipe時の挙動
+    @objc func didSwipe(_ sender: UISwipeGestureRecognizer) {
+        if sender.direction == .right {
+            print("right")
+            self.filterArray.append(filterArray.first!)
+            self.filterArray.removeFirst()
+        } else if sender.direction == .left {
+            print("left")
+            self.filterArray.insert(filterArray.last!, at: 0)
+            self.filterArray.removeLast()
+        }
+        filterLabel.text = filterArray.first!
+    }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -74,7 +100,7 @@ class MovieViewController: UIViewController, AVCaptureFileOutputRecordingDelegat
         SVProgressHUD.show()
         //フィルターをかける
         let asset = AVAsset(url: outputFileURL)
-        let filter = CIFilter(name: selectedfilter)!
+        let filter = CIFilter(name: filterArray.first!)!
         filter.setDefaults()
         // a: ドット風の白黒
         //CIMinimumComponent：白黒
@@ -117,6 +143,7 @@ class MovieViewController: UIViewController, AVCaptureFileOutputRecordingDelegat
         exportSession.exportAsynchronously {
             UISaveVideoAtPathToSavedPhotosAlbum(tmpURL.path, nil, nil, nil)
              SVProgressHUD.dismiss()
+            SVProgressHUD.showSuccess(withStatus: "保存完了")
         }
         // ライブラリへ保存する（処理なし）
 //        PHPhotoLibrary.shared().performChanges({
@@ -154,58 +181,6 @@ class MovieViewController: UIViewController, AVCaptureFileOutputRecordingDelegat
         }
         isRecoding = !isRecoding
         screenInitialization()
-    }
-
-    @IBAction func selectFilter() {
-        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let alert1 = UIAlertAction(title: "CIPhotoEffectTonal", style: .destructive) { (action) in
-            self.selectedfilter = "CIPhotoEffectTonal"
-        }
-        let alert2 = UIAlertAction(title: "CIMinimumComponent", style: .destructive) { (action) in
-            self.selectedfilter = "CIMinimumComponent"
-        }
-        let alert3 = UIAlertAction(title: "CIPhotoEffectTonal", style: .destructive) { (action) in
-            self.selectedfilter = "CIPhotoEffectTonal"
-        }
-        let alert4 = UIAlertAction(title: "CIColorPosterize", style: .destructive) { (action) in
-            self.selectedfilter = "CIColorPosterize"
-        }
-        let alert5 = UIAlertAction(title: "CIPhotoEffectMono", style: .destructive) { (action) in
-            self.selectedfilter = "CIPhotoEffectMono"
-        }
-        let alert6 = UIAlertAction(title: "CIPhotoEffectNoir", style: .destructive) { (action) in
-            self.selectedfilter = "CIPhotoEffectNoir"
-        }
-        let alert7 = UIAlertAction(title: "CIColorPosterize", style: .destructive) { (action) in
-            self.selectedfilter = "CIColorPosterize"
-        }
-        let alert8 = UIAlertAction(title: "CIMaskToAlpha", style: .destructive) { (action) in
-            self.selectedfilter = "CIMaskToAlpha"
-        }
-        let alert9 = UIAlertAction(title: "CIColorMonochrome", style: .destructive) { (action) in
-            self.selectedfilter = "CIColorMonochrome"
-        }
-        let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel) { (action) in
-            alertController.dismiss(animated: true, completion: nil)
-        }
-        
-        alertController.addAction(alert1)
-        alertController.addAction(alert2)
-        alertController.addAction(alert3)
-        alertController.addAction(alert4)
-        alertController.addAction(alert5)
-        alertController.addAction(alert6)
-        alertController.addAction(alert7)
-        alertController.addAction(alert8)
-        alertController.addAction(alert9)
-        alertController.addAction(cancelAction)
-        //ipadで必須
-        alertController.popoverPresentationController?.sourceView = self.view
-        let screenSize = UIScreen.main.bounds
-        // ここで表示位置を調整
-        // xは画面中央、yは画面下部になる様に指定
-        alertController.popoverPresentationController?.sourceRect = CGRect(x: screenSize.size.width/2, y: screenSize.size.height, width: 0, height: 0)
-        self.present(alertController, animated: true, completion: nil)
     }
     
 }
